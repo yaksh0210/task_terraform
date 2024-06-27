@@ -84,7 +84,7 @@ resource "null_resource" "ssh_connection" {
       "sudo apt install -y ansible",
       "sudo apt-get update",
       "sudo apt-get install -y software-properties-common",
-      "ansible-playbook -i localhost, -u ubuntu playbook.yml --extra-vars 'ANSIBLE_HOST_KEY_CHECKING=False'"
+      "ansible-playbook -i localhost, -u ubuntu playbook.yml --extra-vars 'ANSIBLE_HOST_KEY_CHECKING=False' --private-key= `Your_key.pem` "
     ]
 
     connection {

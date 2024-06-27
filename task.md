@@ -203,7 +203,7 @@ provisioner "remote-exec" {
       "sudo apt install -y ansible",
       "sudo apt-get update",
       "sudo apt-get install -y", "software-properties-common",
-      "ansible-playbook -i localhost, -u ubuntu playbook.yml"     
+      "ansible-playbook -i localhost, -u ubuntu playbook.yml --extra-vars 'ANSIBLE_HOST_KEY_CHECKING=False' --private-key=My_key.pem "
      ]
 
     connection {
