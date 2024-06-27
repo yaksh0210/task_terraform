@@ -1,0 +1,39 @@
+- name: Configure web server
+  hosts: localhost
+  become: yes
+
+  tasks:
+  - name: Install Docker
+    apt:
+      name: docker.io
+      state: present
+
+  - name: Install Python 3 pip
+    apt:
+      name: python3-pip
+      state: present
+    become: yes
+
+  - name: Install Docker Python module
+    pip:
+      name: docker
+      state: present
+    become: yes
+
+  - name: Copy Dockerfile
+    copy:
+      content: |
+        FROM ubuntu:latest
+        RUN apt-get update && apt-get install -y nginx
+        RUN echo "Mission successful!" > /var/www/html/index.html
+        EXPOSE 80
+        CMD ["nginx", "-g", "daemon off;"]
+      dest: /path to your /Dockerfile
+
+  - name: Build Docker image
+    command: docker build -t my-web-server .
+
+  - name: Run Docker container
+    command: docker run -p 80:80 my-web-server
+  environment:
+    HOST_KEY_CHECKING: "False"
